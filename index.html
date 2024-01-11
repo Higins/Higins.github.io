@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grecz Balázs - Portfolio</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ryanjairam.github.io/typewriter/js/typewriter.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: black;
+            color: #00FF00;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        #terminal {
+            border: 2px solid #00FF00;
+            padding: 20px;
+            margin-top: 1%;
+            border-radius: 10px;
+            width: 99%;
+            max-width: 90%;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .command {
+            color: #00FFFF;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            position: relative;
+        }
+
+        .output {
+            color: #00FF00;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .prompt {
+            color: #FFD700;
+        }
+
+        /* Typing animation */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        /* Apply typing animation only once for output */
+        .output.typing-animation {
+            animation: typing 3s steps(30, end);
+        }
+
+        .typewriter-text {
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: monospace;
+            font-size: 16px;
+            border-right: 2px solid #000;
+            animation: typewriter 3s steps(25) forwards;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="terminal">
+        <p>
+        <div class="command">~$ cd /portfolio</div>
+        <div class="output"></div>
+        </p>
+        <p>
+        <div class="command">/portfolio$ ls -l</div>
+        <div class="output" id="output1"></div>
+
+        </p>
+        <p>
+        <div class="command">/portfolio$ cat resume.php</div>
+        <div class="output">
+            <pre id="output2"></pre>
+
+        </div>
+        </p>
+        <script>
+            resume =`
+            <?php
+
+            interface ExperienceInterface 
+            {
+                public function displayExperience();
+            }
+
+            class ProfessionalExperience implements ExperienceInterface
+            {
+                private $position;
+                private $company;
+                private $year;
+            
+                public function __construct($position, $company, $year)
+                {
+                    $this->position = $position;
+                    $this->company = $company;
+                    $this->year = $year;
+                }
+            
+                public function displayExperience()
+                {
+                    echo "{$this->position}{$this->company} | {$this->year}\n";
+                }
+            }
+            
+            class DeveloperExperience extends ProfessionalExperience
+            {
+                private $projects;
+            
+                public function __construct($position, $company, $year, $projects)
+                {
+                    parent::__construct($position, $company, $year);
+                    $this->projects = $projects;
+                }
+            
+                public function displayExperience()
+                {
+                    parent::displayExperience();
+                    foreach ($this->projects as $project) {
+                        echo $project . "\n";
+                    }
+                }
+            }
+            
+            class Contact implements ExperienceInterface
+            {
+                private $mobile;
+                private $email;
+                private $linkedin;
+                private $location;
+            
+                public function __construct($mobile, $email, $linkedin, $location)
+                {
+                    $this->mobile = $mobile;
+                    $this->email = $email;
+                    $this->linkedin = $linkedin;
+                    $this->location = $location;
+                }
+            
+                public function displayExperience()
+                {
+                    echo "ELÉRHETŐSÉGEK / CONTACTS\n";
+                    echo "Mobil: {$this->mobile}\n";
+                    echo "E-mail: {$this->email}\n";
+                    echo "Linkedin: {$this->linkedin}\n";
+                    echo "Lakhely: {$this->location}\n";
+                }
+            }
+            
+            class Skills implements ExperienceInterface
+            {
+                private $skills;
+            
+                public function __construct($skills)
+                {
+                    $this->skills = $skills;
+                }
+            
+                public function displayExperience()
+                {
+                    echo "KÉSZSÉGEK/ SKILL\n";
+                    foreach ($this->skills as $skill) {
+                        echo $skill . "\n";
+                    }
+                }
+            }
+            
+            class Studies implements ExperienceInterface
+            {
+                private $studyDetails;
+            
+                public function __construct($studyDetails)
+                {
+                    $this->studyDetails = $studyDetails;
+                }
+            
+                public function displayExperience()
+                {
+                    echo "TANULMÁNYOK/ STUDIES\n";
+                    echo $this->studyDetails . "\n";
+                }
+            }
+            
+            // Instantiate and display the experiences
+            $experiences = [];
+            
+            // Senior Backend developer at Help-Exrpress | 2023 -
+            $experiences[] = new DeveloperExperience(
+                "Senior Backend developer",
+                "Help-Express",
+                "2023 -",
+                [
+                    "Mafilm audio belső vállalatirányítás rendszer",
+                    "Elektromos autó töltő cloud rendszer",
+                    "Elektromos autó töltő hardware fejlesztés",
+                    "Támogatás lebonyolítási rendszer fejlesztés"
+                ]
+            );
+            
+            // Go Backend developer at Konstruktor Online | 2022 –2023
+            $experiences[] = new DeveloperExperience(
+                "Go Backend developer",
+                "Konstruktor Online",
+                "2022-2023",
+                [
+                    "Padthai wokbar belső rendszer fejlesztése",
+                    "Green fridge (https://greenfridge.hu)"
+                ]
+            );
+            
+            // Senior Backend developer at Login Autonom Employee Software | 2020–2022
+            $experiences[] = new DeveloperExperience(
+                "Senior Backend developer",
+                "Login Autonom Employee Software",
+                "2020-2022",
+                [
+                    "Belső vállalatirányítási rendszer fejlesztése",
+                    "Beléptető rendszerek"
+                ]
+            );
+            
+            // Central Media Group Ltd. | 2019-2020
+            $experiences[] = new DeveloperExperience(
+                "PHP Backend developer",
+                "Central Media Group Ltd.",
+                "2019-2020",
+                [
+                    "24.hu",
+                    "Laravel micrositeok",
+                    "nlc.hu",
+                    "kiderul.hu",
+                    "lap.hu",
+                    "startlap.hu"
+                ]
+            );
+            
+            // NaturalSwiss | 2018-2019
+            $experiences[] = new DeveloperExperience(
+                "Software developer / DevOps",
+                "NaturalSwiss",
+                "2018-2019",
+                [
+                    "Belső vállalatirányítási rendszer fejlesztése",
+                    "DHL integráció",
+                    "AWS (EC2,R53,CloudFront,IAM,Certificate Manager,S3,ELK)"
+            
+                ]
+            );
+            
+            // Nerd Developments Kft. | 2015-2018
+            $experiences[] = new DeveloperExperience(
+                "Software developer",
+                "Nerd Developments Kft.",
+                "2015-2018",
+                [
+                    "BÁV Zrt: Weblap fejlesztés",
+                    "BÁV Zrt: Intranet fejlesztés",
+                    "BÁV Zrt: E-learning rendszer",
+                    "Törzs vásárlói kártya rendszer",
+                    "Főtaxi Zrt: Főtaxi reptéri prevoucher és voucher osztó rendszer fejlesztése",
+                    "Főtaxi Zrt: Vállalat irányító rendszer fejlesztése",
+                    "Budapesti Békéltető Testület: Weblap fejlesztés",
+                    "Csendes Consulting Kft: Dokumentumkezelő és Folyamattámogató rendszer fejlesztése",
+            
+                ]
+            );
+            
+            // Contacts
+            $experiences[] = new Contact(
+                "+36 70 378 5754",
+                "greczb20@gmail.com",
+                "https://linkedin.com/in/greczbalazs/",
+                "Budapest"
+            );
+            
+            // Skills
+            $experiences[] = new Skills([
+                "PHP 7+, HTML 5, Jquery, MySQL , Objektum Orientált Programozás,",
+                "CSS 3, JavaScript , Yii 1.x, Linux",
+                "(debian,ubuntu,centos),",
+                "MacOS, Swift (alap), SVN, GIT, Python, AWS, TWIG,",
+                "Laravel 6+, Blade, Go lang, PostgresSQL, Grapql,",
+                "Solidity, REST APIs"
+            ]);
+            
+            // Studies
+            $experiences[] = new Studies("2013.09-2015.06 LIA Alapítványi Óvoda és Szakképző Iskola Szoftverfejlesztő");
+            
+            // Display all experiences
+            foreach ($experiences as $experience) {
+                $experience->displayExperience();
+                echo "\n";
+            }
+            ?>`;
+
+            $('#output1').clearIt().typeIt('index.html  style.css  resume.php', 0.06, 'text').hideCursor();
+            $('#output2').clearIt().typeIt(resume, 0.06, 'text').hideCursor();
+
+        </script>
+
+    </div>
+</body>
+
+</html>
