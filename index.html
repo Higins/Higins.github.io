@@ -135,7 +135,7 @@
             
                 public function displayExperience()
                 {
-                    echo "{$this->position}{$this->company} | {$this->year}\n";
+                    echo "{$this->position}{$this->company} | {$this->year}";
                 }
             }
             
@@ -153,7 +153,7 @@
                 {
                     parent::displayExperience();
                     foreach ($this->projects as $project) {
-                        echo $project . "\n";
+                        echo $project . "";
                     }
                 }
             }
@@ -175,11 +175,11 @@
             
                 public function displayExperience()
                 {
-                    echo "ELÉRHETŐSÉGEK / CONTACTS\n";
-                    echo "Mobil: {$this->mobile}\n";
-                    echo "E-mail: {$this->email}\n";
-                    echo "Linkedin: {$this->linkedin}\n";
-                    echo "Lakhely: {$this->location}\n";
+                    echo "ELÉRHETŐSÉGEK / CONTACTS";
+                    echo "Mobil: {$this->mobile}";
+                    echo "E-mail: {$this->email}";
+                    echo "Linkedin: {$this->linkedin}";
+                    echo "Lakhely: {$this->location}";
                 }
             }
             
@@ -194,9 +194,9 @@
             
                 public function displayExperience()
                 {
-                    echo "KÉSZSÉGEK/ SKILL\n";
+                    echo "KÉSZSÉGEK/ SKILL";
                     foreach ($this->skills as $skill) {
-                        echo $skill . "\n";
+                        echo $skill . "";
                     }
                 }
             }
@@ -212,8 +212,8 @@
             
                 public function displayExperience()
                 {
-                    echo "TANULMÁNYOK/ STUDIES\n";
-                    echo $this->studyDetails . "\n";
+                    echo "TANULMÁNYOK/ STUDIES";
+                    echo $this->studyDetails . "";
                 }
             }
             
@@ -325,7 +325,7 @@
             // Display all experiences
             foreach ($experiences as $experience) {
                 $experience->displayExperience();
-                echo "\n";
+                echo "";
             }
             ?>`;
 
