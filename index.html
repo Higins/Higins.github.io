@@ -111,7 +111,8 @@
 
         </div>
         </p>
-
+        <script>
+            resume =`
             <?php
 
             interface ExperienceInterface 
@@ -326,7 +327,12 @@
                 $experience->displayExperience();
                 echo "";
             }
-            ?>
+            ?>`;
+
+            $('#output1').clearIt().typeIt('index.html  style.css  resume.php', 0,9, 'text').hideCursor();
+            $('#output2').clearIt().typeIt(resume, 1, 'text').hideCursor();
+
+        </script>
 
     </div>
 </body>
